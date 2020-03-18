@@ -80,7 +80,6 @@ def resume_gui(training_data_dir_path, index, file_path, file_content):
     lines_with_dummy_labels = [[line, -1, -1] for line in file_content]
     
     master = Tk()
-    master = Tk()
     master.columnconfigure(0, weight=1)
     master.rowconfigure(0, weight=1)
     master.geometry("{0}x{1}+0+0".format(master.winfo_screenwidth(), 

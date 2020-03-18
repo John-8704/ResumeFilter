@@ -80,6 +80,15 @@ def resume_gui(training_data_dir_path, index, file_path, file_content):
     lines_with_dummy_labels = [[line, -1, -1] for line in file_content]
     
     master = Tk()
+    master = Tk()
+    master.columnconfigure(0, weight=1)
+    master.rowconfigure(0, weight=1)
+    master.geometry("{0}x{1}+0+0".format(master.winfo_screenwidth(), 
+                                         master.winfo_screenheight()))
+    canvas = Canvas(master, width=170, height=300)
+    vsb = Scrollbar(master, orient="vertical", command=canvas.yview)
+    canvas.grid(row=0, column=0, sticky=W + E + N + S)
+    vsb.grid(row=0, column=1, sticky=N+S)
     gui = LabelResume(master, lines_with_dummy_labels)
     
     def callback():
@@ -92,7 +101,7 @@ def resume_gui(training_data_dir_path, index, file_path, file_content):
         data.drop(data.index[rows_to_drop],inplace = True,axis = 0)
         data.to_csv(output_file_path,index = False)
 
-
+    canvas.config(yscrollcommand= vsb.set, scrollregion=canvas.bbox("all"))
     master.protocol("WM_DELETE_WINDOW", callback)
     gui.mainloop()
 
